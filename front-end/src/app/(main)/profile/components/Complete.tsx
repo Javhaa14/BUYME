@@ -42,14 +42,14 @@ export const Complete = () => {
         </div>
       </div>
       <div className="flex w-full flex-col items-start gap-3 text-[#09090B] text-[14px]">
-        {form.map((val) => {
+        {form.map((val, i) => {
           return val.el == "input" ? (
-            <div className={val.clas}>
+            <div key={i} className={val.clas}>
               <p>{val.title}</p>
               <input className={val.na} placeholder={val.placeholder}></input>
             </div>
           ) : (
-            <div className={val.clas}>
+            <div key={i} className={val.clas}>
               <p>{val.title}</p>
               <textarea
                 className={val.na}
