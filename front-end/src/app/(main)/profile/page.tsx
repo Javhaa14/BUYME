@@ -2,6 +2,7 @@
 import { Coffee } from "lucide-react";
 import { useState } from "react";
 import { Complete } from "./components/Complete";
+import { Payment } from "./components/Payment";
 
 export default function Home() {
   const [step, setStep] = useState(2);
@@ -14,7 +15,7 @@ export default function Home() {
       <button className="absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]">
         {step == 3 ? "Sign up" : "Log in"}
       </button>
-      <Complete />
+      <Payment />
     </div>
   );
 }
