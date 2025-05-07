@@ -13,8 +13,9 @@ export default function Home() {
         <p className="text-[16px] font-bold">Buy Me Coffee</p>
       </div>
       <button className="absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]">
-        {step == 3 ? "Sign up" : "Log in"}
+        Log out
       </button>
+      {/* <Complete /> */}
       <Payment />
     </div>
   );

@@ -27,7 +27,7 @@ export const Complete = () => {
     },
   ];
   return (
-    <div className="text-[#09090B] overflow-scroll flex w-[510px] max-w-[672px] flex-col items-start gap-6">
+    <div className="text-[#09090B] overflow-scroll flex w-[510px] max-w-[672px] flex-col items-start gap-6 border-[1px] border-black rounded-xl p-10 ">
       <div className="flex flex-col items-start gap-[1px]">
         <p className=" text-[24px] font-semibold">Complete your profile page</p>
       </div>
@@ -35,8 +35,7 @@ export const Complete = () => {
         <p className="text-[14px] font-medium">Add photo</p>
         <input
           type="file"
-          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"
-        ></input>
+          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"></input>
         <div className="flex size-[160px] justify-center items-center rounded-full border-[2px] border-dashed border-black bg-white">
           <Camera className="" />
         </div>
@@ -53,8 +52,7 @@ export const Complete = () => {
               <p>{val.title}</p>
               <textarea
                 className={val.na}
-                placeholder={val.placeholder}
-              ></textarea>
+                placeholder={val.placeholder}></textarea>
             </div>
           );
         })}
