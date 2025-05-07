@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Navi } from "./components/Navi";
 import { Earnings } from "./components/Earnings";
 import { Guest } from "./components/Guest";
+import { Nosupport } from "./components/Nosupport";
 
 export default function Home() {
   const [step, setStep] = useState(2);
@@ -35,7 +36,8 @@ export default function Home() {
               </button>
             </div>
             <div className="flex p-6 flex-col items-start gap-4 rounded-lg border-[1px] border-[#E4E4E7] bg-white">
-              <Guest />
+              {/* <Guest /> */}
+              <Nosupport />
             </div>
           </div>
         </div>
