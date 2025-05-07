@@ -35,7 +35,8 @@ export const Complete = () => {
         <p className="text-[14px] font-medium">Add photo</p>
         <input
           type="file"
-          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"></input>
+          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"
+        ></input>
         <div className="flex size-[160px] justify-center items-center rounded-full border-[2px] border-dashed border-black bg-white">
           <Camera className="" />
         </div>
@@ -52,7 +53,8 @@ export const Complete = () => {
               <p>{val.title}</p>
               <textarea
                 className={val.na}
-                placeholder={val.placeholder}></textarea>
+                placeholder={val.placeholder}
+              ></textarea>
             </div>
           );
         })}
