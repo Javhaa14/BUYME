@@ -1,11 +1,14 @@
-import express from "express"
+import express, { json } from "express";
+import { userRouter } from "./routes/user";
 
+const app = express();
 
-const app=express()
-app.get("/",(req,res)=>{
-    res.send("Hello")
+app.use(json());
 
-})
-app.listen(9999,()=>{
-    console.log("running at  http://localhost:9999/" );
-})
+app.use("/user", userRouter);
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+app.listen(9999, () => {
+  console.log("running at  http://localhost:9999/");
+});
