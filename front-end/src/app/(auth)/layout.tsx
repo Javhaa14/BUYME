@@ -24,8 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} antialiased items-center w-screen h-screen overflow-hidden bg-[#FFFFFF] flex flex-row gap-5`}
-    >
+      className={`${geistSans.variable} ${geistMono.variable} antialiased items-center w-screen h-screen overflow-hidden bg-[#FFFFFF] flex flex-row gap-5`}>
       <div className="bg-[#FBBF24] w-[50%] h-full flex justify-center items-center relative">
         <div className="text-[#09090B] flex items-center gap-2 z-50 absolute top-[5%] left-[7%]">
           <Coffee className="size-5" />
@@ -38,8 +37,7 @@ export default function RootLayout({
             width="241"
             height="240"
             viewBox="0 0 241 240"
-            fill="none"
-          >
+            fill="none">
             <mask
               id="mask0_1_4181"
               //   className="mask-type:alpha"
@@ -47,8 +45,7 @@ export default function RootLayout({
               x="0"
               y="0"
               width="241"
-              height="240"
-            >
+              height="240">
               <circle cx="120.5" cy="120" r="120" fill="white" />
             </mask>
             <g mask="url(#mask0_1_4181)">
