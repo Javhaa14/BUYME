@@ -3,7 +3,7 @@ import { Coffee } from "lucide-react";
 export const Right = () => {
   const don = [1, 2, 5, 10];
   return (
-    <div className="flex w-[628px] h-auto p-6 flex-col items-start gap-8 rounded-lg border-[1px] border-[#E4E4E5] bg-blue-200 text-[#18181B]">
+    <div className="flex w-[628px] h-full p-6 flex-col items-start gap-8 rounded-lg border-[1px] border-[#E4E4E5] bg-white text-[#18181B]">
       <div className="flex flex-col items-start gap-6">
         <div className="flex flex-col items-start gap-3">
           <p className="text-[24px] font-semibold">Buy Jake a Coffee</p>
@@ -11,9 +11,11 @@ export const Right = () => {
         <div className="flex flex-col items-start gap-2">
           <p className="text[14px] font-medium">Select amount:</p>
           <div className="flex items-center gap-3">
-            {don.map((m) => {
+            {don.map((m, i) => {
               return (
-                <button className="cursor-pointer  flex h-10 px-4 py-2 justify-center items-center gap-2 rounded-md bg-white">
+                <button
+                  key={i}
+                  className="cursor-pointer  flex h-10 px-4 py-2 justify-center items-center gap-2 rounded-md bg-white">
                   <Coffee />
                   <p className="text-[14px] font-medium">${m}</p>
                 </button>
