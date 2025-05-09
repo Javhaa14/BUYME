@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../utils/prisma";
-export const checkUsername=async (req: Request, res: Response) => {
+export const checkUsername = async (req: Request, res: Response) => {
   const { name }: any = req.body;
   try {
-    const user = await prisma.user.findUnique({where:{name:name}})
+    const user = await prisma.user.findUnique({ where: { name: name } });
     if (user) {
-      return res.send({
+      return res.status(400).send({
         success: false,
         message: "Username already taken",
-      })
+      });
     }
     return res
-    .status(200)
+      .status(200)
       .send({
         success: true,
         mes: "Username available",
@@ -20,7 +20,7 @@ export const checkUsername=async (req: Request, res: Response) => {
       .end();
   } catch (error: any) {
     return res
-    .status(400)
+      .status(400)
       .send({
         success: false,
         message: error.message,
@@ -40,7 +40,7 @@ export const createUser = async (req: Request, res: Response) => {
       },
     });
     return res
-    .status(200)
+      .status(200)
       .send({
         success: true,
         mes: response,
@@ -48,10 +48,10 @@ export const createUser = async (req: Request, res: Response) => {
       .end();
   } catch (error: any) {
     return res
-    .status(400)
+      .status(400)
       .send({
         success: false,
-        message:"Email already exist",
+        message: "Email already exist",
       })
       .end();
   }
