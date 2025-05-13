@@ -17,6 +17,7 @@ model User {
   email    String @unique
   password String
   name     String @unique
+  // Profile  Profile?
 }
 
 model Profile {
@@ -27,9 +28,10 @@ model Profile {
   socialMEdiaURL  String
   backgroundImage String
   successMessage  String
-  userId          Int
-  createdAt       DateTime
-  updatedAt       DateTime
+  userId          Int      @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  // user            User     @relation(fields: [userId], references: [id])
 }
 
 model Donation {
@@ -39,8 +41,8 @@ model Donation {
   socialURLOrBuyMeCoffee String
   donorID                Int
   respientAt             String
-  createdAt              DateTime
-  updatedAt              DateTime
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }
 
 model Bankcard {
@@ -51,6 +53,6 @@ model Bankcard {
   cardNumber String
   expiryDate DateTime
   userId     Int
-  createdAt  DateTime
-  updatedAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
