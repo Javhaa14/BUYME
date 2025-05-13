@@ -2,12 +2,13 @@ import { useState } from "react";
 
 export const Step3 = ({
   onSubmit,
+  message,
 }: {
   onSubmit: (values: { email: string; password: string }) => void;
+  message: string;
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = () => {
     onSubmit({ email, password });
   };
@@ -24,7 +25,9 @@ export const Step3 = ({
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex h-[40px] px-3 py-2 items-center self-stretch rounded-md border-[1px] border-[#E4E4E7] bg-white"
+            className={`focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex h-[40px] px-3 py-2 items-center self-stretch rounded-md border-[1px] border-[#E4E4E7] bg-white ${
+              message ? "border-[#EF4444]" : "border-[#E4E4E7]"
+            }`}
           />
         </div>
         <div className="text-[#09090B] flex flex-col items-start gap-[8px] self-stretch">
@@ -34,15 +37,17 @@ export const Step3 = ({
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex h-[40px] px-3 py-2 items-center self-stretch rounded-md border-[1px] border-[#E4E4E7] bg-white"
+            className={`focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex h-[40px] px-3 py-2 items-center self-stretch rounded-md border-[1px] border-[#E4E4E7] bg-white ${
+              message ? "border-[#EF4444]" : "border-[#E4E4E7]"
+            }`}
           />
+          <p className="text-[#EF4444]">{message}</p>
         </div>
       </div>
       <div className="flex px-6 pb-6 flex-col items-start gap-[10px] self-stretch">
         <button
           onClick={handleSubmit}
-          className="cursor-pointer w-full bg-black text-white flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-[6px]"
-        >
+          className="cursor-pointer w-full bg-black text-white flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-[6px]">
           Continue
         </button>
       </div>

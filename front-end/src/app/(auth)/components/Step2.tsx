@@ -56,8 +56,7 @@ export const Step2 = ({ onSubmit }: { onSubmit: any }) => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full relative"
-            >
+              className="w-full relative flex flex-col">
               <FormField
                 control={form.control}
                 name="email"
@@ -68,7 +67,7 @@ export const Step2 = ({ onSubmit }: { onSubmit: any }) => {
                         placeholder="Enter your email"
                         type=""
                         autoComplete="off"
-                        className={`focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex w-full h-[40px] px-3 py-2 items-center self-stretch rounded-md mb-[10px] bg-white 
+                        className={`focus:outline-none focus:ring-0 border-[1px] placeholder:text-[#71717A] flex w-full h-[40px] px-3 py-2 items-center self-stretch rounded-md mb-[40px] bg-white 
                           ${
                             fieldState.error
                               ? "border-[#EF4444]"
@@ -77,7 +76,7 @@ export const Step2 = ({ onSubmit }: { onSubmit: any }) => {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="mb-[10px]" />
+                    <FormMessage className="bottom-27.5 absolute" />
                   </FormItem>
                 )}
               />
@@ -92,7 +91,7 @@ export const Step2 = ({ onSubmit }: { onSubmit: any }) => {
                         placeholder="Enter your password"
                         type="password"
                         autoComplete="off"
-                        className={`focus:outline-none focus:ring-0 placeholder:text-[#71717A] flex w-full h-[40px] px-3 py-2 items-center self-stretch rounded-md mb-[10px] bg-white 
+                        className={`focus:outline-none  border-[1px] focus:ring-0 placeholder:text-[#71717A] flex w-full h-[40px] px-3 py-2 items-center self-stretch rounded-md mb-[60px] bg-white 
                           ${
                             fieldState.error
                               ? "border-[#EF4444]"
@@ -101,15 +100,14 @@ export const Step2 = ({ onSubmit }: { onSubmit: any }) => {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="mb-[10px]" />
+                    <FormMessage className="bottom-5 absolute" />
                   </FormItem>
                 )}
               />
 
               <Button
                 className={`cursor-pointer w-full bg-black text-white flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-[6px] absolute bottom-[-40]`}
-                type="submit"
-              >
+                type="submit">
                 Continue
               </Button>
             </form>

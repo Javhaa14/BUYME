@@ -83,12 +83,18 @@ export const Step1 = ({ onSubmit }: { onSubmit: any }) => {
           <p className="font-semibold text-[14px]">Username</p>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (usernameStatus === "available") {
+                  form.handleSubmit(onSubmit)(e);
+                } else {
+                }
+              }}
               className="w-full flex flex-col justify-between">
               <FormField
                 control={form.control}
                 name="username"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <input
