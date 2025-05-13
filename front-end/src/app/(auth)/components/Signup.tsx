@@ -25,93 +25,21 @@ const formSchema = z.object({
 export const Signup = () => {
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
-  //   const handlesign = async () => {
-  //     const validationSchema = Yup.object({
-  //       email: Yup.string()
-  //         .email("Invalid email address")
-  //         .required("Email is required")
-  //         .test("includes-com-and-at", "Invalid email address", (value) => {
-  //           if (!value) return false;
-  //           return value.includes("@") && value.includes(".com");
-  //         }),
-  //     });
-  //     const passvalidationSchema = Yup.object({
-  //       password: Yup.string()
-  //         .required("Password is required")
-  //         .min(8, "Password must be at least 8 characters")
-  //         .matches(
-  //           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_-])[A-Za-z\d@$!%*?#&_-]{8,}$/,
-  //           "Password is too weak. Use uppercase, lowercase, number, and special character."
-  //         ),
-  //     });
-  //     const email = signinput.email;
-  //     const pass = signinput.password;
-
-  //     try {
-  //       await validationSchema.validate({ email });
-  //       setValids((prevval) => ({
-  //         email: email,
-  //         password: prevval.password,
-  //       }));
-  //       setMessages((prevMessages) => ({
-  //         email: "",
-  //         password: prevMessages.password,
-  //       }));
-  //     } catch (error) {
-  //       if (error instanceof Yup.ValidationError) {
-  //         setMessages((prevMessages) => ({
-  //           email: error.message,
-  //           password: prevMessages.password,
-  //         }));
-  //       }
-  //     }
-  //     try {
-  //       await passvalidationSchema.validate({ pass });
-  //       console.log(pass, "HELLO FROM");
-
-  //       setValids((prevval) => ({
-  //         email: prevval.email,
-  //         password: pass,
-  //       }));
-  //       setMessages((prevMessages) => ({
-  //         email: prevMessages.email,
-  //         password: "",
-  //       }));
-  //     } catch (error) {
-  //       if (error instanceof Yup.ValidationError) {
-  //         setMessages((prevMessages) => ({
-  //           email: prevMessages.email,
-  //           password: error.message,
-  //         }));
-  //       }
-  //     }
-  //     if (valids.email !== "" && valids.password !== "") {
-  //       try {
-  //         await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/user`, {
-  //           name: newusername,
-  //           email: valids.email,
-  //           pass: valids.password,
-  //         });
-  //       } catch (error) {
-  //         console.log(error, "error");
-  //       }
-  //     }
-  //   };
+  const [message, setMessage] = useState("");
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     setUsername(values.username);
     setStep(2);
   }
   async function onSub(values: z.infer<typeof formSchema>) {
+    console.log(values, "values");
+
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/user`, {
         name: username,
         email: values.email,
         password: values.password,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error: any) {}
     setStep(3);
   }
   const router = useRouter();
@@ -127,9 +55,9 @@ export const Signup = () => {
           withCredentials: true,
         }
       );
-      router.push("/home");
-    } catch (error) {
-      console.log(error);
+      router.push("/profile");
+    } catch (error: any) {
+      setMessage(error.response.data.mes);
     }
   }
   const handler = () => {
@@ -144,11 +72,10 @@ export const Signup = () => {
     <div className="w-full h-full flex justify-center items-center">
       {step == 1 && <Step1 onSubmit={onSubmit} />}
       {step == 2 && <Step2 onSubmit={onSub} />}
-      {step == 3 && <Step3 onSubmit={onLogin} />}
+      {step == 3 && <Step3 message={message} onSubmit={onLogin} />}
       <button
         onClick={handler}
-        className="cursor-pointer absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]"
-      >
+        className="cursor-pointer absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]">
         {step == 3 ? "Sign up" : "Log in"}
       </button>
     </div>
