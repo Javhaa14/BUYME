@@ -13,8 +13,46 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
   password String
-  name     String @unique
+  name     String   @unique
+  Profile  Profile?
+}
+
+model Profile {
+  id              Int      @id @default(autoincrement())
+  name            String
+  about           String
+  avatarImage     String
+  socialMEdiaURL  String
+  backgroundImage String
+  successMessage  String
+  userId          Int      @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model Donation {
+  id                     Int      @id @default(autoincrement())
+  amount                 Int
+  specialMessage         String
+  socialURLOrBuyMeCoffee String
+  donorID                Int
+  respientAt             String
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model Bankcard {
+  id         Int      @id @default(autoincrement())
+  country    String
+  firstName  String
+  lastName   String
+  cardNumber String
+  expiryDate DateTime
+  userId     Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
