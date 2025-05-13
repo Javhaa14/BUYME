@@ -12,10 +12,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  password String 
-  name  String @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  name     String @unique
+}
+
+model Profile {
+  id              Int      @id @default(autoincrement())
+  name            String
+  about           String
+  avatarImage     String
+  socialMEdiaURL  String
+  backgroundImage String
+  successMessage  String
+  userId          Int
+  createdAt       DateTime
+  updatedAt       DateTime
+}
+
+model Donation {
+  id                     Int      @id @default(autoincrement())
+  amount                 Int
+  specialMessage         String
+  socialURLOrBuyMeCoffee String
+  donorID                Int
+  respientAt             String
+  createdAt              DateTime
+  updatedAt              DateTime
+}
+
+model Bankcard {
+  id         Int      @id @default(autoincrement())
+  country    String
+  firstName  String
+  lastName   String
+  cardNumber String
+  expiryDate DateTime
+  userId     Int
+  createdAt  DateTime
+  updatedAt  DateTime
 }
