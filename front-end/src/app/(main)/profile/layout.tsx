@@ -1,21 +1,18 @@
-import type { Metadata } from "next";
+"use client";
 import { ChevronDown, Coffee } from "lucide-react";
-import Image from "next/image";
-
-export const metadata: Metadata = {
-  title: "Buy Me Coffee",
-  description: "BUY",
-};
+import { useState } from "react";
+import { AuthContext } from "../../../../context/Authcontext";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [user, setUser] = useState("user");
+
   return (
     <div
-      className={`bg-white w-full h-screen gap-11 flex flex-col justify-start px-4 py-2 items-center relative`}
-    >
+      className={`bg-white w-full h-screen gap-11 flex flex-col justify-start px-4 py-2 items-center relative`}>
       <div className="flex w-full justify-between items-center max-w-[1280px]">
         <div className="text-[#09090B] flex items-center gap-2">
           <Coffee className="size-5" />
@@ -25,7 +22,9 @@ export default function RootLayout({
           Log out
         </button>
       </div>
-      {children}
+      <AuthContext.Provider value={{ user, setUser }}>
+        {children}
+      </AuthContext.Provider>
     </div>
   );
 }

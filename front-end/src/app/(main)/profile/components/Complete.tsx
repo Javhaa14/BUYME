@@ -1,11 +1,15 @@
 import axios from "axios";
-import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Camera } from "lucide-react";
+import { useContext } from "react";
+import { AuthContext } from "../../../../../context/Authcontext";
 
 export const Complete = () => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const router = useRouter();
+
+  const { user, setUser } = useContext(AuthContext);
   const form = [
     {
       el: "input",

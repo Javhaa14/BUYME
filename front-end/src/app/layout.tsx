@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ChevronDown, Coffee } from "lucide-react";
 import Image from "next/image";
+import { AuthContext } from "../../context/Authcontext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-white w-full h-screen ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`bg-white w-full h-screen ${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
