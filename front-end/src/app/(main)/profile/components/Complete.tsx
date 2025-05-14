@@ -110,9 +110,11 @@ export const Complete = () => {
         <input
           onChange={handleimg}
           type="file"
-          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"
-        ></input>
-        <div className="flex size-[160px] justify-center items-center rounded-full border-[2px] border-dashed border-black bg-white">
+          className="text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer"></input>
+        <div
+          className={`flex size-[160px] justify-center items-center rounded-full border-dashed border-black bg-white ${
+            profile.image ? "border-[0px]" : "border-[1px]"
+          }`}>
           {profile.image ? (
             <img
               src={profile.image}
@@ -133,8 +135,7 @@ export const Complete = () => {
                 name={val.name}
                 onChange={handleInput}
                 className={val.na}
-                placeholder={val.placeholder}
-              ></input>
+                placeholder={val.placeholder}></input>
             </div>
           ) : (
             <div key={i} className={val.clas}>
@@ -143,8 +144,7 @@ export const Complete = () => {
                 name={val.name}
                 onChange={handleInput}
                 className={val.na}
-                placeholder={val.placeholder}
-              ></textarea>
+                placeholder={val.placeholder}></textarea>
             </div>
           );
         })}
@@ -153,8 +153,7 @@ export const Complete = () => {
       <div className="flex flex-col w-full items-end justify-end gap-[10px]">
         <button
           onClick={createprofile}
-          className="cursor-pointer flex w-[246px] h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-black text-white"
-        >
+          className="cursor-pointer flex w-[246px] h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-black text-white">
           Continue
         </button>
       </div>
