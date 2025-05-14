@@ -6,6 +6,8 @@ import { Step1 } from "./Step1";
 import { Step3 } from "./Step3";
 import { Step2 } from "./Step2";
 import { useRouter } from "next/navigation";
+import jwt from "jsonwebtoken";
+
 const formSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }).max(20),
   password: z
@@ -44,7 +46,7 @@ export const Signup = () => {
   const router = useRouter();
   async function onLogin(values: { email: string; password: string }) {
     try {
-      await axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/auth`,
         {
           email: values.email,
@@ -54,7 +56,15 @@ export const Signup = () => {
           withCredentials: true,
         }
       );
-      router.push("/profile");
+      //   const token = response.data.token
+      // const decoded = jwt.verify(token, secret as string);
+
+      //   try {
+      //     await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/profile/view/${}`,)
+      //     router.push("/profile");
+      //   } catch (error) {
+
+      //   }
     } catch (error: any) {
       setMessage(error.response.data.mes);
     }
@@ -74,8 +84,7 @@ export const Signup = () => {
       {step == 3 && <Step3 message={message} onSubmit={onLogin} />}
       <button
         onClick={handler}
-        className="cursor-pointer absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]"
-      >
+        className="cursor-pointer absolute text-[14px] text-black top-[4%] right-[7%] flex h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]">
         {step == 3 ? "Sign up" : "Log in"}
       </button>
     </div>
