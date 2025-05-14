@@ -8,11 +8,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [user, setUser] = useState("user");
-
   return (
     <div
-      className={`bg-white w-full h-screen gap-11 flex flex-col justify-start px-4 py-2 items-center relative`}>
+      className={`bg-white w-full h-screen gap-11 flex flex-col justify-start px-4 py-2 items-center relative`}
+    >
       <div className="flex w-full justify-between items-center max-w-[1280px]">
         <div className="text-[#09090B] flex items-center gap-2">
           <Coffee className="size-5" />
@@ -22,9 +21,7 @@ export default function RootLayout({
           Log out
         </button>
       </div>
-      <AuthContext.Provider value={{ user, setUser }}>
-        {children}
-      </AuthContext.Provider>
+      {children}
     </div>
   );
 }

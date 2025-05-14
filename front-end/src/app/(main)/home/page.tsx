@@ -1,12 +1,14 @@
 "use client";
 import { ChevronDown, Coffee } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Navi } from "./components/Navi";
 import { Earnings } from "./components/Earnings";
 import { Guest } from "./components/Guest";
+import { AuthContext } from "../../../../context/Authcontext";
 
 export default function Home() {
   const [step, setStep] = useState(2);
+
   return (
     <div className="flex w-full gap-[70px] ">
       <Navi />

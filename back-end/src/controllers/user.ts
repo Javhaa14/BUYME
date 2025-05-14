@@ -76,6 +76,35 @@ export const getUsers = async (req: Request, res: Response) => {
       .end();
   }
 };
+export const getUserById = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+
+  if (!user || !user.id) {
+    return res.status(400).send({ message: "User ID not available" });
+  }
+
+  try {
+    const foundUser = await prisma.user.findUnique({
+      where: {
+        id: user.id,
+      },
+    });
+
+    if (!foundUser) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    return res.status(200).send(foundUser);
+  } catch (error: any) {
+    return res
+      .status(500)
+      .send({ message: "Server error", error: error.message });
+  }
+};
+
 export const updateUserbyId = async (req: Request, res: Response) => {
   const { userid } = req.params;
   const { email, password, name }: any = req.body;

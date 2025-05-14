@@ -37,11 +37,13 @@ export const Login = async (req: Request, res: Response) => {
         })
         .end();
     }
-    const token = jwt.sign({ id: user.id, email: user.email }, secret as any, {
-      expiresIn: "1h",
-    });
-
-    console.log(token, "ji");
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      secret as any,
+      {
+        expiresIn: "1h",
+      }
+    );
     return res
       .cookie("token", token, {
         httpOnly: true,
@@ -52,7 +54,6 @@ export const Login = async (req: Request, res: Response) => {
       .send({
         success: true,
         mes: "Successfully logged in",
-        token: token,
       })
       .end();
   } catch (error) {

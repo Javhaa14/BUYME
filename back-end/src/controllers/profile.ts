@@ -1,37 +1,32 @@
 import { Request, Response } from "express";
 import { prisma } from "../utils/prisma";
-export const getProfilebyUsername = async (req: Request, res: Response) => {
-  const { userId }: any = req.params;
+export const getProfilebyUserId = async (req: Request, res: Response) => {
+  const decodedUser = (req as any).user;
 
-  try {
-    const user = await prisma.profile.findUnique({
-      where: { userId: parseInt(userId) },
-    });
-    if (user) {
-      return res.status(200).send({
-        success: true,
-        user: user,
-      });
-    }
-    return res
-      .status(404)
-      .send({
-        success: false,
-        mes: "User not found",
-      })
-      .end();
-  } catch (error: any) {
+  if (!decodedUser || !decodedUser.id) {
     return res
       .status(400)
-      .send({
-        success: false,
-        message: error.message,
-      })
-      .end();
+      .send({ success: false, message: "Invalid token or user ID" });
+  }
+
+  try {
+    const profile = await prisma.profile.findUnique({
+      where: { userId: decodedUser.id }, // 👈 Corrected this line
+    });
+
+    if (!profile) {
+      return res
+        .status(404)
+        .send({ success: false, message: "Profile not found" });
+    }
+
+    return res.status(200).send({ success: true, profile });
+  } catch (error: any) {
+    return res.status(500).send({ success: false, message: error.message });
   }
 };
 export const createProfile = async (req: Request, res: Response) => {
-  //   const { userId }: any = req.params;
+  const decodedUser = (req as any).user;
   const {
     name,
     about,
@@ -39,7 +34,6 @@ export const createProfile = async (req: Request, res: Response) => {
     socialMEdiaURL,
     backgroundImage,
     successMessage,
-    userId,
   }: any = req.body;
   try {
     const response = await prisma.profile.create({
@@ -50,7 +44,7 @@ export const createProfile = async (req: Request, res: Response) => {
         socialMEdiaURL,
         backgroundImage,
         successMessage,
-        userId,
+        userId: decodedUser.id,
       },
     });
     return res
