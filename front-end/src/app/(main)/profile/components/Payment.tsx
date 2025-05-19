@@ -1,6 +1,10 @@
+"use state";
 import { ChevronDown, ChevronsUpDown } from "lucide-react";
+import { useState } from "react";
 
 export const Payment = () => {
+  const [selectedCountry, setSelectedCountry] = useState("");
+
   return (
     <div className="text-[#09090B] overflow-scroll flex w-[510px] max-w-[672px] flex-col items-start gap-6 border-[1px] border-black rounded-xl p-10 ">
       <div className="flex py-6 flex-col items-start gap-[6px] self-stretch">
@@ -15,25 +19,32 @@ export const Payment = () => {
         <div className="flex w-full flex-col items-center gap-6">
           <div className="flex w-full flex-col items-start gap-2 self-stretch">
             <p className="text-[14px] font-medium">Select country</p>
-            <div className="flex w-full flex-col items-start gap-1 self-stretch">
-              <div className="flex w-full h-[40px] px-3 py-2 justify-between items-center gap-[10px] self-stretch rounded-md border-[1px] border-[#E4E4E7] bg-white">
-                <p className="text-[14px]"> Select</p>
-                <ChevronDown />
-              </div>
-            </div>
+            <select
+              className="flex w-full h-[40px] px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white text-[14px]"
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.target.value)}
+            >
+              <option value="">Select</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="uk">United Kingdom</option>
+              <option value="in">India</option>
+            </select>
           </div>
           <div className="flex items-start gap-3 self-stretch">
             <div className="flex w-full flex-col items-start gap-2">
               <p className="text-[14px] font-medium">First name</p>
               <input
                 placeholder="Enter your name here"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
+                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
+              ></input>
             </div>
             <div className="flex w-full flex-col items-start gap-2">
               <p className="text-[14px] font-medium">Last name</p>
               <input
                 placeholder="Enter your name here"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
+                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
+              ></input>
             </div>
           </div>
 
@@ -42,7 +53,8 @@ export const Payment = () => {
             <input
               type="number"
               placeholder="XXXX-XXXX-XXXX-XXXX"
-              className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
+              className="no-spinner flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
+            ></input>
           </div>
 
           <div className="flex items-start gap-4 self-stretch">
@@ -67,8 +79,10 @@ export const Payment = () => {
             <div className="flex flex-col items-start gap-2">
               <p className="text-[14px] font-medium">CVC</p>
               <input
+                type="number"
                 placeholder="CVC"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
+                className="no-spinner flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
+              ></input>
             </div>
           </div>
         </div>
