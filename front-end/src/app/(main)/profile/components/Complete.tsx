@@ -5,7 +5,7 @@ import { Camera, CircleX, X } from "lucide-react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../context/Authcontext";
 
-export const Complete = () => {
+export const Complete = ({ stepper }: any) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const router = useRouter();
   const { user, setUser } = useContext(AuthContext);
@@ -135,8 +135,8 @@ export const Complete = () => {
       );
 
       setUser(profileResponse.data.mes);
-
-      router.push("/home");
+      stepper();
+      // router.push("/home");
     } catch (error) {
       console.error("Failed to create profile:", error);
     }
@@ -152,16 +152,14 @@ export const Complete = () => {
         <input
           onChange={handleimg}
           type="file"
-          className={`text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer`}
-        ></input>
+          className={`text-transparent absolute top-8.5 size-[160px] justify-center items-center rounded-full cursor-pointer`}></input>
 
         <div
           className={`flex size-[160px] justify-center items-center rounded-full border-dashed ${
             error.image
               ? "border-[#EF4444] border-[1px]"
               : "border-black border-[0px]"
-          } bg-white`}
-        >
+          } bg-white`}>
           {profile.image ? (
             <img
               src={profile.image}
@@ -188,8 +186,7 @@ export const Complete = () => {
                 name={val.name}
                 onChange={handleInput}
                 className={val.na}
-                placeholder={val.placeholder}
-              ></input>
+                placeholder={val.placeholder}></input>
               {val.name === "name" && error.name && (
                 <div className="flex gap-2 items-center">
                   <CircleX className="text-[#EF4444] size-[14px]" />
@@ -214,8 +211,7 @@ export const Complete = () => {
                 name={val.name}
                 onChange={handleInput}
                 className={val.na}
-                placeholder={val.placeholder}
-              ></textarea>
+                placeholder={val.placeholder}></textarea>
               {val.name === "about" && error.about && (
                 <div className="flex gap-2 items-center">
                   <CircleX className="text-[#EF4444] size-[14px]" />
@@ -232,8 +228,7 @@ export const Complete = () => {
       <div className="flex flex-col w-full items-end justify-end gap-[10px]">
         <button
           onClick={createprofile}
-          className="cursor-pointer flex w-[246px] h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-black text-white"
-        >
+          className="cursor-pointer flex w-[246px] h-[40px] px-4 py-2 justify-center items-center gap-2 rounded-md bg-black text-white">
           Continue
         </button>
       </div>

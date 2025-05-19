@@ -27,15 +27,13 @@ export const Payment = () => {
               <p className="text-[14px] font-medium">First name</p>
               <input
                 placeholder="Enter your name here"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
-              ></input>
+                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
             </div>
             <div className="flex w-full flex-col items-start gap-2">
               <p className="text-[14px] font-medium">Last name</p>
               <input
                 placeholder="Enter your name here"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
-              ></input>
+                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
             </div>
           </div>
 
@@ -44,8 +42,7 @@ export const Payment = () => {
             <input
               type="number"
               placeholder="XXXX-XXXX-XXXX-XXXX"
-              className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
-            ></input>
+              className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
           </div>
 
           <div className="flex items-start gap-4 self-stretch">
@@ -71,8 +68,7 @@ export const Payment = () => {
               <p className="text-[14px] font-medium">CVC</p>
               <input
                 placeholder="CVC"
-                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"
-              ></input>
+                className="flex w-full h-full px-3 py-2 items-center rounded-md border-[1px] border-[#E4E4E7] bg-white"></input>
             </div>
           </div>
         </div>
