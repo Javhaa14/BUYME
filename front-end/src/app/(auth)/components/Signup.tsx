@@ -1,11 +1,13 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { z } from "zod";
 import { Step1 } from "./Step1";
 import { Step3 } from "./Step3";
 import { Step2 } from "./Step2";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "../../../../context/Authcontext";
+
 const formSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }).max(20),
   password: z
@@ -22,6 +24,8 @@ const formSchema = z.object({
     .email({ message: "Invalid email address" }),
 });
 export const Signup = () => {
+  const { user, setUser } = useContext(AuthContext);
+
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
@@ -44,7 +48,7 @@ export const Signup = () => {
   const router = useRouter();
   async function onLogin(values: { email: string; password: string }) {
     try {
-      await axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/auth`,
         {
           email: values.email,
@@ -54,7 +58,21 @@ export const Signup = () => {
           withCredentials: true,
         }
       );
-      router.push("/profile");
+      try {
+        const profileResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}/profile/view`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        setUser(profileResponse.data.profile);
+        console.log(user, "hi");
+
+        router.push("/home");
+      } catch (error) {
+        router.push("/profile");
+      }
     } catch (error: any) {
       setMessage(error.response.data.mes);
     }

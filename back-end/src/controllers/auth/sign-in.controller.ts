@@ -16,9 +16,11 @@ export const Login = async (req: Request, res: Response) => {
         email: email,
       },
     });
+    console.log(user, "user");
+
     if (!user) {
       return res
-        .status(404)
+        .status(400)
         .send({
           success: false,
           mes: "Email or password wrong",
@@ -35,13 +37,14 @@ export const Login = async (req: Request, res: Response) => {
         })
         .end();
     }
-    const token = jwt.sign({ id: user.id, email: user.email }, secret as any, {
-      expiresIn: "1h",
-    });
-
-    console.log(token, "ji");
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      secret as any,
+      {
+        expiresIn: "1h",
+      }
+    );
     return res
-
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 60 * 1000 * 10,
@@ -51,10 +54,9 @@ export const Login = async (req: Request, res: Response) => {
       .send({
         success: true,
         mes: "Successfully logged in",
-        token: token,
       })
       .end();
   } catch (error) {
-    return res.send({ message: "Cannot log in" });
+    return res.status(500).send({ message: "Cannot log in" });
   }
 };

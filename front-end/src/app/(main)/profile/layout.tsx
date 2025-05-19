@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import { ChevronDown, Coffee } from "lucide-react";
-import Image from "next/image";
-
-export const metadata: Metadata = {
-  title: "Buy Me Coffee",
-  description: "BUY",
-};
+import { useState } from "react";
+import { AuthContext } from "../../../../context/Authcontext";
 
 export default function RootLayout({
   children,
