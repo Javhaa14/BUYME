@@ -1137,6 +1137,45 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    bankcards: number
+    donations: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    bankcards?: boolean | UserCountOutputTypeCountBankcardsArgs
+    donations?: boolean | UserCountOutputTypeCountDonationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBankcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BankcardWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDonationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DonationWhereInput
+  }
+
 
   /**
    * Models
@@ -1332,7 +1371,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     name?: boolean
-    Profile?: boolean | User$ProfileArgs<ExtArgs>
+    profile?: boolean | User$profileArgs<ExtArgs>
+    bankcards?: boolean | User$bankcardsArgs<ExtArgs>
+    donations?: boolean | User$donationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1358,7 +1400,10 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Profile?: boolean | User$ProfileArgs<ExtArgs>
+    profile?: boolean | User$profileArgs<ExtArgs>
+    bankcards?: boolean | User$bankcardsArgs<ExtArgs>
+    donations?: boolean | User$donationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1366,7 +1411,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      Profile: Prisma.$ProfilePayload<ExtArgs> | null
+      profile: Prisma.$ProfilePayload<ExtArgs> | null
+      bankcards: Prisma.$BankcardPayload<ExtArgs>[]
+      donations: Prisma.$DonationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1767,7 +1814,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Profile<T extends User$ProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$ProfileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    bankcards<T extends User$bankcardsArgs<ExtArgs> = {}>(args?: Subset<T, User$bankcardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BankcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    donations<T extends User$donationsArgs<ExtArgs> = {}>(args?: Subset<T, User$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2189,9 +2238,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Profile
+   * User.profile
    */
-  export type User$ProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$profileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Profile
      */
@@ -2205,6 +2254,54 @@ export namespace Prisma {
      */
     include?: ProfileInclude<ExtArgs> | null
     where?: ProfileWhereInput
+  }
+
+  /**
+   * User.bankcards
+   */
+  export type User$bankcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bankcard
+     */
+    select?: BankcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Bankcard
+     */
+    omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    where?: BankcardWhereInput
+    orderBy?: BankcardOrderByWithRelationInput | BankcardOrderByWithRelationInput[]
+    cursor?: BankcardWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BankcardScalarFieldEnum | BankcardScalarFieldEnum[]
+  }
+
+  /**
+   * User.donations
+   */
+  export type User$donationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Donation
+     */
+    select?: DonationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Donation
+     */
+    omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    where?: DonationWhereInput
+    orderBy?: DonationOrderByWithRelationInput | DonationOrderByWithRelationInput[]
+    cursor?: DonationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DonationScalarFieldEnum | DonationScalarFieldEnum[]
   }
 
   /**
@@ -2253,7 +2350,7 @@ export namespace Prisma {
     name: string | null
     about: string | null
     avatarImage: string | null
-    socialMEdiaURL: string | null
+    socialMediaURL: string | null
     backgroundImage: string | null
     successMessage: string | null
     userId: number | null
@@ -2266,7 +2363,7 @@ export namespace Prisma {
     name: string | null
     about: string | null
     avatarImage: string | null
-    socialMEdiaURL: string | null
+    socialMediaURL: string | null
     backgroundImage: string | null
     successMessage: string | null
     userId: number | null
@@ -2279,7 +2376,7 @@ export namespace Prisma {
     name: number
     about: number
     avatarImage: number
-    socialMEdiaURL: number
+    socialMediaURL: number
     backgroundImage: number
     successMessage: number
     userId: number
@@ -2304,7 +2401,7 @@ export namespace Prisma {
     name?: true
     about?: true
     avatarImage?: true
-    socialMEdiaURL?: true
+    socialMediaURL?: true
     backgroundImage?: true
     successMessage?: true
     userId?: true
@@ -2317,7 +2414,7 @@ export namespace Prisma {
     name?: true
     about?: true
     avatarImage?: true
-    socialMEdiaURL?: true
+    socialMediaURL?: true
     backgroundImage?: true
     successMessage?: true
     userId?: true
@@ -2330,7 +2427,7 @@ export namespace Prisma {
     name?: true
     about?: true
     avatarImage?: true
-    socialMEdiaURL?: true
+    socialMediaURL?: true
     backgroundImage?: true
     successMessage?: true
     userId?: true
@@ -2430,7 +2527,7 @@ export namespace Prisma {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     userId: number
@@ -2462,7 +2559,7 @@ export namespace Prisma {
     name?: boolean
     about?: boolean
     avatarImage?: boolean
-    socialMEdiaURL?: boolean
+    socialMediaURL?: boolean
     backgroundImage?: boolean
     successMessage?: boolean
     userId?: boolean
@@ -2476,7 +2573,7 @@ export namespace Prisma {
     name?: boolean
     about?: boolean
     avatarImage?: boolean
-    socialMEdiaURL?: boolean
+    socialMediaURL?: boolean
     backgroundImage?: boolean
     successMessage?: boolean
     userId?: boolean
@@ -2490,7 +2587,7 @@ export namespace Prisma {
     name?: boolean
     about?: boolean
     avatarImage?: boolean
-    socialMEdiaURL?: boolean
+    socialMediaURL?: boolean
     backgroundImage?: boolean
     successMessage?: boolean
     userId?: boolean
@@ -2504,7 +2601,7 @@ export namespace Prisma {
     name?: boolean
     about?: boolean
     avatarImage?: boolean
-    socialMEdiaURL?: boolean
+    socialMediaURL?: boolean
     backgroundImage?: boolean
     successMessage?: boolean
     userId?: boolean
@@ -2512,7 +2609,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "avatarImage" | "socialMEdiaURL" | "backgroundImage" | "successMessage" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["profile"]>
+  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "avatarImage" | "socialMediaURL" | "backgroundImage" | "successMessage" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["profile"]>
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2533,7 +2630,7 @@ export namespace Prisma {
       name: string
       about: string
       avatarImage: string
-      socialMEdiaURL: string
+      socialMediaURL: string
       backgroundImage: string
       successMessage: string
       userId: number
@@ -2967,7 +3064,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Profile", 'String'>
     readonly about: FieldRef<"Profile", 'String'>
     readonly avatarImage: FieldRef<"Profile", 'String'>
-    readonly socialMEdiaURL: FieldRef<"Profile", 'String'>
+    readonly socialMediaURL: FieldRef<"Profile", 'String'>
     readonly backgroundImage: FieldRef<"Profile", 'String'>
     readonly successMessage: FieldRef<"Profile", 'String'>
     readonly userId: FieldRef<"Profile", 'Int'>
@@ -3581,7 +3678,7 @@ export namespace Prisma {
   export type DonationGroupByOutputType = {
     id: number
     amount: number
-    specialMessage: string
+    specialMessage: string | null
     socialURLOrBuyMeCoffee: string
     donorID: number
     respientAt: string
@@ -3617,6 +3714,7 @@ export namespace Prisma {
     respientAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    donor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["donation"]>
 
   export type DonationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3628,6 +3726,7 @@ export namespace Prisma {
     respientAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    donor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["donation"]>
 
   export type DonationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3639,6 +3738,7 @@ export namespace Prisma {
     respientAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    donor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["donation"]>
 
   export type DonationSelectScalar = {
@@ -3653,14 +3753,25 @@ export namespace Prisma {
   }
 
   export type DonationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "specialMessage" | "socialURLOrBuyMeCoffee" | "donorID" | "respientAt" | "createdAt" | "updatedAt", ExtArgs["result"]["donation"]>
+  export type DonationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    donor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DonationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    donor?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DonationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    donor?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $DonationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Donation"
-    objects: {}
+    objects: {
+      donor: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       amount: number
-      specialMessage: string
+      specialMessage: string | null
       socialURLOrBuyMeCoffee: string
       donorID: number
       respientAt: string
@@ -4060,6 +4171,7 @@ export namespace Prisma {
    */
   export interface Prisma__DonationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    donor<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4114,6 +4226,10 @@ export namespace Prisma {
      */
     omit?: DonationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    /**
      * Filter, which Donation to fetch.
      */
     where: DonationWhereUniqueInput
@@ -4132,6 +4248,10 @@ export namespace Prisma {
      */
     omit?: DonationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    /**
      * Filter, which Donation to fetch.
      */
     where: DonationWhereUniqueInput
@@ -4149,6 +4269,10 @@ export namespace Prisma {
      * Omit specific fields from the Donation
      */
     omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
     /**
      * Filter, which Donation to fetch.
      */
@@ -4198,6 +4322,10 @@ export namespace Prisma {
      */
     omit?: DonationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    /**
      * Filter, which Donation to fetch.
      */
     where?: DonationWhereInput
@@ -4246,6 +4374,10 @@ export namespace Prisma {
      */
     omit?: DonationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    /**
      * Filter, which Donations to fetch.
      */
     where?: DonationWhereInput
@@ -4289,6 +4421,10 @@ export namespace Prisma {
      */
     omit?: DonationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
+    /**
      * The data needed to create a Donation.
      */
     data: XOR<DonationCreateInput, DonationUncheckedCreateInput>
@@ -4322,6 +4458,10 @@ export namespace Prisma {
      */
     data: DonationCreateManyInput | DonationCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4336,6 +4476,10 @@ export namespace Prisma {
      * Omit specific fields from the Donation
      */
     omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
     /**
      * The data needed to update a Donation.
      */
@@ -4388,6 +4532,10 @@ export namespace Prisma {
      * Limit how many Donations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4402,6 +4550,10 @@ export namespace Prisma {
      * Omit specific fields from the Donation
      */
     omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
     /**
      * The filter to search for the Donation to update in case it exists.
      */
@@ -4428,6 +4580,10 @@ export namespace Prisma {
      * Omit specific fields from the Donation
      */
     omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
     /**
      * Filter which Donation to delete.
      */
@@ -4460,6 +4616,10 @@ export namespace Prisma {
      * Omit specific fields from the Donation
      */
     omit?: DonationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DonationInclude<ExtArgs> | null
   }
 
 
@@ -4697,6 +4857,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankcard"]>
 
   export type BankcardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4709,6 +4870,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankcard"]>
 
   export type BankcardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4721,6 +4883,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankcard"]>
 
   export type BankcardSelectScalar = {
@@ -4736,10 +4899,21 @@ export namespace Prisma {
   }
 
   export type BankcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "country" | "firstName" | "lastName" | "cardNumber" | "expiryDate" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["bankcard"]>
+  export type BankcardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BankcardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BankcardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $BankcardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bankcard"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       country: string
@@ -5144,6 +5318,7 @@ export namespace Prisma {
    */
   export interface Prisma__BankcardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5199,6 +5374,10 @@ export namespace Prisma {
      */
     omit?: BankcardOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    /**
      * Filter, which Bankcard to fetch.
      */
     where: BankcardWhereUniqueInput
@@ -5217,6 +5396,10 @@ export namespace Prisma {
      */
     omit?: BankcardOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    /**
      * Filter, which Bankcard to fetch.
      */
     where: BankcardWhereUniqueInput
@@ -5234,6 +5417,10 @@ export namespace Prisma {
      * Omit specific fields from the Bankcard
      */
     omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
     /**
      * Filter, which Bankcard to fetch.
      */
@@ -5283,6 +5470,10 @@ export namespace Prisma {
      */
     omit?: BankcardOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    /**
      * Filter, which Bankcard to fetch.
      */
     where?: BankcardWhereInput
@@ -5331,6 +5522,10 @@ export namespace Prisma {
      */
     omit?: BankcardOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    /**
      * Filter, which Bankcards to fetch.
      */
     where?: BankcardWhereInput
@@ -5374,6 +5569,10 @@ export namespace Prisma {
      */
     omit?: BankcardOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
+    /**
      * The data needed to create a Bankcard.
      */
     data: XOR<BankcardCreateInput, BankcardUncheckedCreateInput>
@@ -5407,6 +5606,10 @@ export namespace Prisma {
      */
     data: BankcardCreateManyInput | BankcardCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5421,6 +5624,10 @@ export namespace Prisma {
      * Omit specific fields from the Bankcard
      */
     omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
     /**
      * The data needed to update a Bankcard.
      */
@@ -5473,6 +5680,10 @@ export namespace Prisma {
      * Limit how many Bankcards to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5487,6 +5698,10 @@ export namespace Prisma {
      * Omit specific fields from the Bankcard
      */
     omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
     /**
      * The filter to search for the Bankcard to update in case it exists.
      */
@@ -5513,6 +5728,10 @@ export namespace Prisma {
      * Omit specific fields from the Bankcard
      */
     omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
     /**
      * Filter which Bankcard to delete.
      */
@@ -5545,6 +5764,10 @@ export namespace Prisma {
      * Omit specific fields from the Bankcard
      */
     omit?: BankcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BankcardInclude<ExtArgs> | null
   }
 
 
@@ -5577,7 +5800,7 @@ export namespace Prisma {
     name: 'name',
     about: 'about',
     avatarImage: 'avatarImage',
-    socialMEdiaURL: 'socialMEdiaURL',
+    socialMediaURL: 'socialMediaURL',
     backgroundImage: 'backgroundImage',
     successMessage: 'successMessage',
     userId: 'userId',
@@ -5631,6 +5854,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -5705,7 +5936,9 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
-    Profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
+    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
+    bankcards?: BankcardListRelationFilter
+    donations?: DonationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5713,7 +5946,9 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     name?: SortOrder
-    Profile?: ProfileOrderByWithRelationInput
+    profile?: ProfileOrderByWithRelationInput
+    bankcards?: BankcardOrderByRelationAggregateInput
+    donations?: DonationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5724,7 +5959,9 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
-    Profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
+    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
+    bankcards?: BankcardListRelationFilter
+    donations?: DonationListRelationFilter
   }, "id" | "email" | "name">
 
   export type UserOrderByWithAggregationInput = {
@@ -5757,7 +5994,7 @@ export namespace Prisma {
     name?: StringFilter<"Profile"> | string
     about?: StringFilter<"Profile"> | string
     avatarImage?: StringFilter<"Profile"> | string
-    socialMEdiaURL?: StringFilter<"Profile"> | string
+    socialMediaURL?: StringFilter<"Profile"> | string
     backgroundImage?: StringFilter<"Profile"> | string
     successMessage?: StringFilter<"Profile"> | string
     userId?: IntFilter<"Profile"> | number
@@ -5771,7 +6008,7 @@ export namespace Prisma {
     name?: SortOrder
     about?: SortOrder
     avatarImage?: SortOrder
-    socialMEdiaURL?: SortOrder
+    socialMediaURL?: SortOrder
     backgroundImage?: SortOrder
     successMessage?: SortOrder
     userId?: SortOrder
@@ -5789,7 +6026,7 @@ export namespace Prisma {
     name?: StringFilter<"Profile"> | string
     about?: StringFilter<"Profile"> | string
     avatarImage?: StringFilter<"Profile"> | string
-    socialMEdiaURL?: StringFilter<"Profile"> | string
+    socialMediaURL?: StringFilter<"Profile"> | string
     backgroundImage?: StringFilter<"Profile"> | string
     successMessage?: StringFilter<"Profile"> | string
     createdAt?: DateTimeFilter<"Profile"> | Date | string
@@ -5802,7 +6039,7 @@ export namespace Prisma {
     name?: SortOrder
     about?: SortOrder
     avatarImage?: SortOrder
-    socialMEdiaURL?: SortOrder
+    socialMediaURL?: SortOrder
     backgroundImage?: SortOrder
     successMessage?: SortOrder
     userId?: SortOrder
@@ -5823,7 +6060,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Profile"> | string
     about?: StringWithAggregatesFilter<"Profile"> | string
     avatarImage?: StringWithAggregatesFilter<"Profile"> | string
-    socialMEdiaURL?: StringWithAggregatesFilter<"Profile"> | string
+    socialMediaURL?: StringWithAggregatesFilter<"Profile"> | string
     backgroundImage?: StringWithAggregatesFilter<"Profile"> | string
     successMessage?: StringWithAggregatesFilter<"Profile"> | string
     userId?: IntWithAggregatesFilter<"Profile"> | number
@@ -5837,23 +6074,25 @@ export namespace Prisma {
     NOT?: DonationWhereInput | DonationWhereInput[]
     id?: IntFilter<"Donation"> | number
     amount?: IntFilter<"Donation"> | number
-    specialMessage?: StringFilter<"Donation"> | string
+    specialMessage?: StringNullableFilter<"Donation"> | string | null
     socialURLOrBuyMeCoffee?: StringFilter<"Donation"> | string
     donorID?: IntFilter<"Donation"> | number
     respientAt?: StringFilter<"Donation"> | string
     createdAt?: DateTimeFilter<"Donation"> | Date | string
     updatedAt?: DateTimeFilter<"Donation"> | Date | string
+    donor?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type DonationOrderByWithRelationInput = {
     id?: SortOrder
     amount?: SortOrder
-    specialMessage?: SortOrder
+    specialMessage?: SortOrderInput | SortOrder
     socialURLOrBuyMeCoffee?: SortOrder
     donorID?: SortOrder
     respientAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    donor?: UserOrderByWithRelationInput
   }
 
   export type DonationWhereUniqueInput = Prisma.AtLeast<{
@@ -5862,18 +6101,19 @@ export namespace Prisma {
     OR?: DonationWhereInput[]
     NOT?: DonationWhereInput | DonationWhereInput[]
     amount?: IntFilter<"Donation"> | number
-    specialMessage?: StringFilter<"Donation"> | string
+    specialMessage?: StringNullableFilter<"Donation"> | string | null
     socialURLOrBuyMeCoffee?: StringFilter<"Donation"> | string
     donorID?: IntFilter<"Donation"> | number
     respientAt?: StringFilter<"Donation"> | string
     createdAt?: DateTimeFilter<"Donation"> | Date | string
     updatedAt?: DateTimeFilter<"Donation"> | Date | string
+    donor?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type DonationOrderByWithAggregationInput = {
     id?: SortOrder
     amount?: SortOrder
-    specialMessage?: SortOrder
+    specialMessage?: SortOrderInput | SortOrder
     socialURLOrBuyMeCoffee?: SortOrder
     donorID?: SortOrder
     respientAt?: SortOrder
@@ -5892,7 +6132,7 @@ export namespace Prisma {
     NOT?: DonationScalarWhereWithAggregatesInput | DonationScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Donation"> | number
     amount?: IntWithAggregatesFilter<"Donation"> | number
-    specialMessage?: StringWithAggregatesFilter<"Donation"> | string
+    specialMessage?: StringNullableWithAggregatesFilter<"Donation"> | string | null
     socialURLOrBuyMeCoffee?: StringWithAggregatesFilter<"Donation"> | string
     donorID?: IntWithAggregatesFilter<"Donation"> | number
     respientAt?: StringWithAggregatesFilter<"Donation"> | string
@@ -5913,6 +6153,7 @@ export namespace Prisma {
     userId?: IntFilter<"Bankcard"> | number
     createdAt?: DateTimeFilter<"Bankcard"> | Date | string
     updatedAt?: DateTimeFilter<"Bankcard"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type BankcardOrderByWithRelationInput = {
@@ -5925,6 +6166,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type BankcardWhereUniqueInput = Prisma.AtLeast<{
@@ -5940,6 +6182,7 @@ export namespace Prisma {
     userId?: IntFilter<"Bankcard"> | number
     createdAt?: DateTimeFilter<"Bankcard"> | Date | string
     updatedAt?: DateTimeFilter<"Bankcard"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type BankcardOrderByWithAggregationInput = {
@@ -5978,7 +6221,9 @@ export namespace Prisma {
     email: string
     password: string
     name: string
-    Profile?: ProfileCreateNestedOneWithoutUserInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    bankcards?: BankcardCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutDonorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -5986,14 +6231,18 @@ export namespace Prisma {
     email: string
     password: string
     name: string
-    Profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    bankcards?: BankcardUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutDonorInput
   }
 
   export type UserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    Profile?: ProfileUpdateOneWithoutUserNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    bankcards?: BankcardUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutDonorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6001,7 +6250,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    Profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    bankcards?: BankcardUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutDonorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6028,7 +6279,7 @@ export namespace Prisma {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     createdAt?: Date | string
@@ -6041,7 +6292,7 @@ export namespace Prisma {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     userId: number
@@ -6053,7 +6304,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6066,7 +6317,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -6079,7 +6330,7 @@ export namespace Prisma {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     userId: number
@@ -6091,7 +6342,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6103,7 +6354,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -6113,18 +6364,18 @@ export namespace Prisma {
 
   export type DonationCreateInput = {
     amount: number
-    specialMessage: string
+    specialMessage?: string | null
     socialURLOrBuyMeCoffee: string
-    donorID: number
     respientAt: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    donor: UserCreateNestedOneWithoutDonationsInput
   }
 
   export type DonationUncheckedCreateInput = {
     id?: number
     amount: number
-    specialMessage: string
+    specialMessage?: string | null
     socialURLOrBuyMeCoffee: string
     donorID: number
     respientAt: string
@@ -6134,18 +6385,18 @@ export namespace Prisma {
 
   export type DonationUpdateInput = {
     amount?: IntFieldUpdateOperationsInput | number
-    specialMessage?: StringFieldUpdateOperationsInput | string
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
     socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
-    donorID?: IntFieldUpdateOperationsInput | number
     respientAt?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    donor?: UserUpdateOneRequiredWithoutDonationsNestedInput
   }
 
   export type DonationUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     amount?: IntFieldUpdateOperationsInput | number
-    specialMessage?: StringFieldUpdateOperationsInput | string
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
     socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
     donorID?: IntFieldUpdateOperationsInput | number
     respientAt?: StringFieldUpdateOperationsInput | string
@@ -6156,7 +6407,7 @@ export namespace Prisma {
   export type DonationCreateManyInput = {
     id?: number
     amount: number
-    specialMessage: string
+    specialMessage?: string | null
     socialURLOrBuyMeCoffee: string
     donorID: number
     respientAt: string
@@ -6166,9 +6417,8 @@ export namespace Prisma {
 
   export type DonationUpdateManyMutationInput = {
     amount?: IntFieldUpdateOperationsInput | number
-    specialMessage?: StringFieldUpdateOperationsInput | string
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
     socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
-    donorID?: IntFieldUpdateOperationsInput | number
     respientAt?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6177,7 +6427,7 @@ export namespace Prisma {
   export type DonationUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     amount?: IntFieldUpdateOperationsInput | number
-    specialMessage?: StringFieldUpdateOperationsInput | string
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
     socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
     donorID?: IntFieldUpdateOperationsInput | number
     respientAt?: StringFieldUpdateOperationsInput | string
@@ -6191,9 +6441,9 @@ export namespace Prisma {
     lastName: string
     cardNumber: string
     expiryDate: Date | string
-    userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBankcardsInput
   }
 
   export type BankcardUncheckedCreateInput = {
@@ -6214,9 +6464,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     cardNumber?: StringFieldUpdateOperationsInput | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBankcardsNestedInput
   }
 
   export type BankcardUncheckedUpdateInput = {
@@ -6249,7 +6499,6 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     cardNumber?: StringFieldUpdateOperationsInput | string
     expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6295,6 +6544,26 @@ export namespace Prisma {
   export type ProfileNullableScalarRelationFilter = {
     is?: ProfileWhereInput | null
     isNot?: ProfileWhereInput | null
+  }
+
+  export type BankcardListRelationFilter = {
+    every?: BankcardWhereInput
+    some?: BankcardWhereInput
+    none?: BankcardWhereInput
+  }
+
+  export type DonationListRelationFilter = {
+    every?: DonationWhereInput
+    some?: DonationWhereInput
+    none?: DonationWhereInput
+  }
+
+  export type BankcardOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DonationOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -6381,7 +6650,7 @@ export namespace Prisma {
     name?: SortOrder
     about?: SortOrder
     avatarImage?: SortOrder
-    socialMEdiaURL?: SortOrder
+    socialMediaURL?: SortOrder
     backgroundImage?: SortOrder
     successMessage?: SortOrder
     userId?: SortOrder
@@ -6399,7 +6668,7 @@ export namespace Prisma {
     name?: SortOrder
     about?: SortOrder
     avatarImage?: SortOrder
-    socialMEdiaURL?: SortOrder
+    socialMediaURL?: SortOrder
     backgroundImage?: SortOrder
     successMessage?: SortOrder
     userId?: SortOrder
@@ -6412,7 +6681,7 @@ export namespace Prisma {
     name?: SortOrder
     about?: SortOrder
     avatarImage?: SortOrder
-    socialMEdiaURL?: SortOrder
+    socialMediaURL?: SortOrder
     backgroundImage?: SortOrder
     successMessage?: SortOrder
     userId?: SortOrder
@@ -6437,6 +6706,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type DonationCountOrderByAggregateInput = {
@@ -6482,6 +6771,24 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     donorID?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BankcardCountOrderByAggregateInput = {
@@ -6536,10 +6843,38 @@ export namespace Prisma {
     connect?: ProfileWhereUniqueInput
   }
 
+  export type BankcardCreateNestedManyWithoutUserInput = {
+    create?: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput> | BankcardCreateWithoutUserInput[] | BankcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BankcardCreateOrConnectWithoutUserInput | BankcardCreateOrConnectWithoutUserInput[]
+    createMany?: BankcardCreateManyUserInputEnvelope
+    connect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+  }
+
+  export type DonationCreateNestedManyWithoutDonorInput = {
+    create?: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput> | DonationCreateWithoutDonorInput[] | DonationUncheckedCreateWithoutDonorInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutDonorInput | DonationCreateOrConnectWithoutDonorInput[]
+    createMany?: DonationCreateManyDonorInputEnvelope
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+  }
+
   export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
     connect?: ProfileWhereUniqueInput
+  }
+
+  export type BankcardUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput> | BankcardCreateWithoutUserInput[] | BankcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BankcardCreateOrConnectWithoutUserInput | BankcardCreateOrConnectWithoutUserInput[]
+    createMany?: BankcardCreateManyUserInputEnvelope
+    connect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+  }
+
+  export type DonationUncheckedCreateNestedManyWithoutDonorInput = {
+    create?: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput> | DonationCreateWithoutDonorInput[] | DonationUncheckedCreateWithoutDonorInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutDonorInput | DonationCreateOrConnectWithoutDonorInput[]
+    createMany?: DonationCreateManyDonorInputEnvelope
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6554,6 +6889,34 @@ export namespace Prisma {
     delete?: ProfileWhereInput | boolean
     connect?: ProfileWhereUniqueInput
     update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BankcardUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput> | BankcardCreateWithoutUserInput[] | BankcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BankcardCreateOrConnectWithoutUserInput | BankcardCreateOrConnectWithoutUserInput[]
+    upsert?: BankcardUpsertWithWhereUniqueWithoutUserInput | BankcardUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BankcardCreateManyUserInputEnvelope
+    set?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    disconnect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    delete?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    connect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    update?: BankcardUpdateWithWhereUniqueWithoutUserInput | BankcardUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BankcardUpdateManyWithWhereWithoutUserInput | BankcardUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BankcardScalarWhereInput | BankcardScalarWhereInput[]
+  }
+
+  export type DonationUpdateManyWithoutDonorNestedInput = {
+    create?: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput> | DonationCreateWithoutDonorInput[] | DonationUncheckedCreateWithoutDonorInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutDonorInput | DonationCreateOrConnectWithoutDonorInput[]
+    upsert?: DonationUpsertWithWhereUniqueWithoutDonorInput | DonationUpsertWithWhereUniqueWithoutDonorInput[]
+    createMany?: DonationCreateManyDonorInputEnvelope
+    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    update?: DonationUpdateWithWhereUniqueWithoutDonorInput | DonationUpdateWithWhereUniqueWithoutDonorInput[]
+    updateMany?: DonationUpdateManyWithWhereWithoutDonorInput | DonationUpdateManyWithWhereWithoutDonorInput[]
+    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -6574,6 +6937,34 @@ export namespace Prisma {
     update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
   }
 
+  export type BankcardUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput> | BankcardCreateWithoutUserInput[] | BankcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BankcardCreateOrConnectWithoutUserInput | BankcardCreateOrConnectWithoutUserInput[]
+    upsert?: BankcardUpsertWithWhereUniqueWithoutUserInput | BankcardUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BankcardCreateManyUserInputEnvelope
+    set?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    disconnect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    delete?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    connect?: BankcardWhereUniqueInput | BankcardWhereUniqueInput[]
+    update?: BankcardUpdateWithWhereUniqueWithoutUserInput | BankcardUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BankcardUpdateManyWithWhereWithoutUserInput | BankcardUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BankcardScalarWhereInput | BankcardScalarWhereInput[]
+  }
+
+  export type DonationUncheckedUpdateManyWithoutDonorNestedInput = {
+    create?: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput> | DonationCreateWithoutDonorInput[] | DonationUncheckedCreateWithoutDonorInput[]
+    connectOrCreate?: DonationCreateOrConnectWithoutDonorInput | DonationCreateOrConnectWithoutDonorInput[]
+    upsert?: DonationUpsertWithWhereUniqueWithoutDonorInput | DonationUpsertWithWhereUniqueWithoutDonorInput[]
+    createMany?: DonationCreateManyDonorInputEnvelope
+    set?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    disconnect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    delete?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    connect?: DonationWhereUniqueInput | DonationWhereUniqueInput[]
+    update?: DonationUpdateWithWhereUniqueWithoutDonorInput | DonationUpdateWithWhereUniqueWithoutDonorInput[]
+    updateMany?: DonationUpdateManyWithWhereWithoutDonorInput | DonationUpdateManyWithWhereWithoutDonorInput[]
+    deleteMany?: DonationScalarWhereInput | DonationScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutProfileInput = {
     create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutProfileInput
@@ -6590,6 +6981,38 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutProfileInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProfileInput, UserUpdateWithoutProfileInput>, UserUncheckedUpdateWithoutProfileInput>
+  }
+
+  export type UserCreateNestedOneWithoutDonationsInput = {
+    create?: XOR<UserCreateWithoutDonationsInput, UserUncheckedCreateWithoutDonationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDonationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutDonationsNestedInput = {
+    create?: XOR<UserCreateWithoutDonationsInput, UserUncheckedCreateWithoutDonationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDonationsInput
+    upsert?: UserUpsertWithoutDonationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDonationsInput, UserUpdateWithoutDonationsInput>, UserUncheckedUpdateWithoutDonationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBankcardsInput = {
+    create?: XOR<UserCreateWithoutBankcardsInput, UserUncheckedCreateWithoutBankcardsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBankcardsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBankcardsNestedInput = {
+    create?: XOR<UserCreateWithoutBankcardsInput, UserUncheckedCreateWithoutBankcardsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBankcardsInput
+    upsert?: UserUpsertWithoutBankcardsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBankcardsInput, UserUpdateWithoutBankcardsInput>, UserUncheckedUpdateWithoutBankcardsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6686,11 +7109,53 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ProfileCreateWithoutUserInput = {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     createdAt?: Date | string
@@ -6702,7 +7167,7 @@ export namespace Prisma {
     name: string
     about: string
     avatarImage: string
-    socialMEdiaURL: string
+    socialMediaURL: string
     backgroundImage: string
     successMessage: string
     createdAt?: Date | string
@@ -6712,6 +7177,66 @@ export namespace Prisma {
   export type ProfileCreateOrConnectWithoutUserInput = {
     where: ProfileWhereUniqueInput
     create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+  }
+
+  export type BankcardCreateWithoutUserInput = {
+    country: string
+    firstName: string
+    lastName: string
+    cardNumber: string
+    expiryDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BankcardUncheckedCreateWithoutUserInput = {
+    id?: number
+    country: string
+    firstName: string
+    lastName: string
+    cardNumber: string
+    expiryDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BankcardCreateOrConnectWithoutUserInput = {
+    where: BankcardWhereUniqueInput
+    create: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput>
+  }
+
+  export type BankcardCreateManyUserInputEnvelope = {
+    data: BankcardCreateManyUserInput | BankcardCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DonationCreateWithoutDonorInput = {
+    amount: number
+    specialMessage?: string | null
+    socialURLOrBuyMeCoffee: string
+    respientAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonationUncheckedCreateWithoutDonorInput = {
+    id?: number
+    amount: number
+    specialMessage?: string | null
+    socialURLOrBuyMeCoffee: string
+    respientAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonationCreateOrConnectWithoutDonorInput = {
+    where: DonationWhereUniqueInput
+    create: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput>
+  }
+
+  export type DonationCreateManyDonorInputEnvelope = {
+    data: DonationCreateManyDonorInput | DonationCreateManyDonorInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProfileUpsertWithoutUserInput = {
@@ -6729,7 +7254,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6741,17 +7266,80 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
     avatarImage?: StringFieldUpdateOperationsInput | string
-    socialMEdiaURL?: StringFieldUpdateOperationsInput | string
+    socialMediaURL?: StringFieldUpdateOperationsInput | string
     backgroundImage?: StringFieldUpdateOperationsInput | string
     successMessage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BankcardUpsertWithWhereUniqueWithoutUserInput = {
+    where: BankcardWhereUniqueInput
+    update: XOR<BankcardUpdateWithoutUserInput, BankcardUncheckedUpdateWithoutUserInput>
+    create: XOR<BankcardCreateWithoutUserInput, BankcardUncheckedCreateWithoutUserInput>
+  }
+
+  export type BankcardUpdateWithWhereUniqueWithoutUserInput = {
+    where: BankcardWhereUniqueInput
+    data: XOR<BankcardUpdateWithoutUserInput, BankcardUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BankcardUpdateManyWithWhereWithoutUserInput = {
+    where: BankcardScalarWhereInput
+    data: XOR<BankcardUpdateManyMutationInput, BankcardUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BankcardScalarWhereInput = {
+    AND?: BankcardScalarWhereInput | BankcardScalarWhereInput[]
+    OR?: BankcardScalarWhereInput[]
+    NOT?: BankcardScalarWhereInput | BankcardScalarWhereInput[]
+    id?: IntFilter<"Bankcard"> | number
+    country?: StringFilter<"Bankcard"> | string
+    firstName?: StringFilter<"Bankcard"> | string
+    lastName?: StringFilter<"Bankcard"> | string
+    cardNumber?: StringFilter<"Bankcard"> | string
+    expiryDate?: DateTimeFilter<"Bankcard"> | Date | string
+    userId?: IntFilter<"Bankcard"> | number
+    createdAt?: DateTimeFilter<"Bankcard"> | Date | string
+    updatedAt?: DateTimeFilter<"Bankcard"> | Date | string
+  }
+
+  export type DonationUpsertWithWhereUniqueWithoutDonorInput = {
+    where: DonationWhereUniqueInput
+    update: XOR<DonationUpdateWithoutDonorInput, DonationUncheckedUpdateWithoutDonorInput>
+    create: XOR<DonationCreateWithoutDonorInput, DonationUncheckedCreateWithoutDonorInput>
+  }
+
+  export type DonationUpdateWithWhereUniqueWithoutDonorInput = {
+    where: DonationWhereUniqueInput
+    data: XOR<DonationUpdateWithoutDonorInput, DonationUncheckedUpdateWithoutDonorInput>
+  }
+
+  export type DonationUpdateManyWithWhereWithoutDonorInput = {
+    where: DonationScalarWhereInput
+    data: XOR<DonationUpdateManyMutationInput, DonationUncheckedUpdateManyWithoutDonorInput>
+  }
+
+  export type DonationScalarWhereInput = {
+    AND?: DonationScalarWhereInput | DonationScalarWhereInput[]
+    OR?: DonationScalarWhereInput[]
+    NOT?: DonationScalarWhereInput | DonationScalarWhereInput[]
+    id?: IntFilter<"Donation"> | number
+    amount?: IntFilter<"Donation"> | number
+    specialMessage?: StringNullableFilter<"Donation"> | string | null
+    socialURLOrBuyMeCoffee?: StringFilter<"Donation"> | string
+    donorID?: IntFilter<"Donation"> | number
+    respientAt?: StringFilter<"Donation"> | string
+    createdAt?: DateTimeFilter<"Donation"> | Date | string
+    updatedAt?: DateTimeFilter<"Donation"> | Date | string
+  }
+
   export type UserCreateWithoutProfileInput = {
     email: string
     password: string
     name: string
+    bankcards?: BankcardCreateNestedManyWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutDonorInput
   }
 
   export type UserUncheckedCreateWithoutProfileInput = {
@@ -6759,6 +7347,8 @@ export namespace Prisma {
     email: string
     password: string
     name: string
+    bankcards?: BankcardUncheckedCreateNestedManyWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutDonorInput
   }
 
   export type UserCreateOrConnectWithoutProfileInput = {
@@ -6781,6 +7371,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bankcards?: BankcardUpdateManyWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutDonorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfileInput = {
@@ -6788,6 +7380,190 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    bankcards?: BankcardUncheckedUpdateManyWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutDonorNestedInput
+  }
+
+  export type UserCreateWithoutDonationsInput = {
+    email: string
+    password: string
+    name: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    bankcards?: BankcardCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDonationsInput = {
+    id?: number
+    email: string
+    password: string
+    name: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    bankcards?: BankcardUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDonationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDonationsInput, UserUncheckedCreateWithoutDonationsInput>
+  }
+
+  export type UserUpsertWithoutDonationsInput = {
+    update: XOR<UserUpdateWithoutDonationsInput, UserUncheckedUpdateWithoutDonationsInput>
+    create: XOR<UserCreateWithoutDonationsInput, UserUncheckedCreateWithoutDonationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDonationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDonationsInput, UserUncheckedUpdateWithoutDonationsInput>
+  }
+
+  export type UserUpdateWithoutDonationsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    bankcards?: BankcardUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDonationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    bankcards?: BankcardUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBankcardsInput = {
+    email: string
+    password: string
+    name: string
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    donations?: DonationCreateNestedManyWithoutDonorInput
+  }
+
+  export type UserUncheckedCreateWithoutBankcardsInput = {
+    id?: number
+    email: string
+    password: string
+    name: string
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    donations?: DonationUncheckedCreateNestedManyWithoutDonorInput
+  }
+
+  export type UserCreateOrConnectWithoutBankcardsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBankcardsInput, UserUncheckedCreateWithoutBankcardsInput>
+  }
+
+  export type UserUpsertWithoutBankcardsInput = {
+    update: XOR<UserUpdateWithoutBankcardsInput, UserUncheckedUpdateWithoutBankcardsInput>
+    create: XOR<UserCreateWithoutBankcardsInput, UserUncheckedCreateWithoutBankcardsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBankcardsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBankcardsInput, UserUncheckedUpdateWithoutBankcardsInput>
+  }
+
+  export type UserUpdateWithoutBankcardsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    donations?: DonationUpdateManyWithoutDonorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBankcardsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    donations?: DonationUncheckedUpdateManyWithoutDonorNestedInput
+  }
+
+  export type BankcardCreateManyUserInput = {
+    id?: number
+    country: string
+    firstName: string
+    lastName: string
+    cardNumber: string
+    expiryDate: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DonationCreateManyDonorInput = {
+    id?: number
+    amount: number
+    specialMessage?: string | null
+    socialURLOrBuyMeCoffee: string
+    respientAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BankcardUpdateWithoutUserInput = {
+    country?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BankcardUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    country?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BankcardUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    country?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    cardNumber?: StringFieldUpdateOperationsInput | string
+    expiryDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonationUpdateWithoutDonorInput = {
+    amount?: IntFieldUpdateOperationsInput | number
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
+    respientAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonationUncheckedUpdateWithoutDonorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    amount?: IntFieldUpdateOperationsInput | number
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
+    respientAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DonationUncheckedUpdateManyWithoutDonorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    amount?: IntFieldUpdateOperationsInput | number
+    specialMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    socialURLOrBuyMeCoffee?: StringFieldUpdateOperationsInput | string
+    respientAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

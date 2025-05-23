@@ -31,7 +31,7 @@ export const createProfile = async (req: Request, res: Response) => {
     name,
     about,
     avatarImage,
-    socialMEdiaURL,
+    socialMediaURL,
     backgroundImage,
     successMessage,
   }: any = req.body;
@@ -41,7 +41,7 @@ export const createProfile = async (req: Request, res: Response) => {
         name,
         about,
         avatarImage,
-        socialMEdiaURL,
+        socialMediaURL,
         backgroundImage,
         successMessage,
         userId: decodedUser.id,

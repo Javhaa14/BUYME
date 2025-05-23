@@ -132,7 +132,7 @@ exports.Prisma.ProfileScalarFieldEnum = {
   name: 'name',
   about: 'about',
   avatarImage: 'avatarImage',
-  socialMEdiaURL: 'socialMEdiaURL',
+  socialMediaURL: 'socialMediaURL',
   backgroundImage: 'backgroundImage',
   successMessage: 'successMessage',
   userId: 'userId',
@@ -171,6 +171,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
