@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-// Schema
 const bankinfoSchema = z.object({
   country: z.string().min(1, { message: "Country is required" }),
   firstName: z.string().min(1, { message: "First name is required" }).max(20),
@@ -28,12 +27,11 @@ const bankinfoSchema = z.object({
   cvc: z.string().min(3, { message: "CVC must be 3 digits" }).max(4),
 });
 
-// Types
 type BankInfo = z.infer<typeof bankinfoSchema>;
 
 export const Payment = () => {
   const countries = ["United States", "Mongolia", "Canada", "United Kingdom"];
-
+  const [cardinfo, setCardinfo] = useState({});
   const form = useForm<BankInfo>({
     resolver: zodResolver(bankinfoSchema),
     defaultValues: {
@@ -48,8 +46,9 @@ export const Payment = () => {
   });
 
   const onSubmit = (data: BankInfo) => {
-    console.log("Form submitted", data);
+    setCardinfo(data);
   };
+  console.log("Form submitted", cardinfo);
 
   return (
     <Form {...form}>
@@ -66,7 +65,6 @@ export const Payment = () => {
           </p>
         </div>
 
-        {/* Country Select */}
         <FormField
           control={form.control}
           name="country"
@@ -91,7 +89,6 @@ export const Payment = () => {
           )}
         />
 
-        {/* Name Fields */}
         <div className="flex gap-4 w-full">
           <FormField
             control={form.control}
@@ -140,6 +137,15 @@ export const Payment = () => {
                 <input
                   {...field}
                   type="text"
+                  inputMode="numeric"
+                  pattern="\d*"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /\D/g,
+                      ""
+                    );
+                    field.onChange(e);
+                  }}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
                   className="w-full px-3 py-2 border border-[#E4E4E7] rounded-md"
                 />
@@ -161,6 +167,15 @@ export const Payment = () => {
                   <input
                     {...field}
                     type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/g,
+                        ""
+                      );
+                      field.onChange(e);
+                    }}
                     placeholder="MM"
                     className="w-full px-3 py-2 border border-[#E4E4E7] rounded-md"
                   />
@@ -179,6 +194,15 @@ export const Payment = () => {
                   <input
                     {...field}
                     type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/g,
+                        ""
+                      );
+                      field.onChange(e);
+                    }}
                     placeholder="YYYY"
                     className="w-full px-3 py-2 border border-[#E4E4E7] rounded-md"
                   />
@@ -197,6 +221,15 @@ export const Payment = () => {
                   <input
                     {...field}
                     type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/g,
+                        ""
+                      );
+                      field.onChange(e);
+                    }}
                     placeholder="CVC"
                     className="w-full px-3 py-2 border border-[#E4E4E7] rounded-md"
                   />
